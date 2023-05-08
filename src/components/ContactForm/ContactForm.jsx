@@ -3,7 +3,7 @@ import { Styled } from './StyleContactForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { nanoid } from 'nanoid';
-import { addContact } from 'store/contactSlice';
+import { addContact, fetchingData } from 'store/contactSlice';
 
 const ContactForm = () => {
   const contacts = useSelector(state => state.contacts.contacts);
@@ -23,8 +23,8 @@ const ContactForm = () => {
     if (isExist) {
       return toast.warn(`${data.name} is already in contacts.`);
     }
-
     dispatch(addContact(data));
+    dispatch(fetchingData());
     e.currentTarget.reset();
   };
   return (
